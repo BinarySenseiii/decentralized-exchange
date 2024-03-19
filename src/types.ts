@@ -1,3 +1,5 @@
+import {ChangeEvent} from 'react'
+
 export interface CKToken {
   chainId: number
   address: string
@@ -14,4 +16,19 @@ export interface CKTokenResponse {
   logoURI: string
   timestamp: string
   tokens: Array<CKToken>
+}
+
+type SwapInput = {inputValue: string; token: CkPartialToken}
+export interface ISwapStore {
+  query: {
+    from: SwapInput
+    to: SwapInput
+    tolerance: number
+  }
+
+  actions: {
+    onQueryChange: (event: ChangeEvent<HTMLInputElement>, action: 'from' | 'to') => void
+    resetState: () => void
+    onToleranceUpdate: (tolerance: number) => void
+  }
 }

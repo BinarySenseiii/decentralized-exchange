@@ -2,19 +2,21 @@
 import {Info, RotateCcw, Settings} from 'lucide-react'
 import {Popover, PopoverContent, PopoverTrigger} from '~/components/ui/popover'
 import {Tooltip, TooltipContent, TooltipTrigger} from '~/components/ui/tooltip'
-import {Separator} from '../ui/separator'
+import {useSwapActions, useSwapQuery} from '~/context/swap-context'
 import {Button} from '../ui/button'
-import {useState} from 'react'
+import {Separator} from '../ui/separator'
 
 const tolerances = [0.5, 2.5, 5]
 
 const SwapSettings = () => {
-  const [tolerance, setTolerance] = useState(0.5)
+  const {tolerance} = useSwapQuery()
+  const {onToleranceUpdate, resetState} = useSwapActions()
+
   return (
     <div className="flex items-center gap-2">
       <Tooltip>
         <TooltipTrigger>
-          <RotateCcw className="size-4" />
+          <RotateCcw className="size-4" onClick={resetState} />
         </TooltipTrigger>
         <TooltipContent>
           <p className="font-semibold italic">Reset Swap</p>
@@ -55,7 +57,7 @@ const SwapSettings = () => {
                   key={index}
                   size="xs"
                   variant={tolerance === t ? 'default' : 'outline'}
-                  onClick={() => setTolerance(t)}
+                  onClick={() => onToleranceUpdate(t)}
                 >
                   {t}%
                 </Button>

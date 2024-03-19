@@ -20,8 +20,8 @@ const SwapSummary = () => {
   const summary = useMemo(
     () => [
       {id: 1, label: 'Commission', value: '$2.48'},
-      {id: 1, label: 'Total Expected After Fees', value: '$714.98'},
-      {id: 1, label: "The Least You'll Get At 1.00% Slippage", value: '$710.54'},
+      {id: 2, label: 'Total Expected After Fees', value: '$714.98'},
+      {id: 3, label: "The Least You'll Get At 1.00% Slippage", value: '$710.54'},
     ],
     [],
   )
