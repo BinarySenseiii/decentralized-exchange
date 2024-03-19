@@ -24,8 +24,7 @@ const SwapWidget = () => {
           <SwapSettings />
         </div>
         <CardDescription className="text-xs !mt-3">
-          serves as a secure bridge between various decentralized ecosystems, empowering users to
-          effortlessly swap tokens across different blockchain networks.
+          Empowering users to effortlessly swap tokens across different blockchain networks.
         </CardDescription>
       </CardHeader>
 

@@ -7,6 +7,8 @@ export interface CKToken {
   logoURI: string
 }
 
+export type CkPartialToken = Partial<CKToken>
+
 export interface CKTokenResponse {
   name: string
   logoURI: string

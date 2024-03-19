@@ -1,7 +1,6 @@
 'use client'
-import React, {useState} from 'react'
-import {Button} from '../ui/button'
 import {ArrowUpDown} from 'lucide-react'
+import {useState} from 'react'
 
 const SwapToggle = () => {
   const [isActive, setIsActive] = useState(false)
