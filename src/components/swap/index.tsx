@@ -1,7 +1,4 @@
 'use client'
-import useTokens from '~/api/hooks/useTokens'
-import {Button} from '../ui/button'
-import SwapSettings from './swap-settings'
 import {
   Card,
   CardContent,
@@ -10,10 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card'
+import {Button} from '../ui/button'
+import SwapSettings from './swap-settings'
+import SwapInputs from './swap-inputs'
+import SwapSummary from './swap-summary'
 
 const SwapWidget = () => {
-  const {data} = useTokens()
-  console.log('data::: ', data)
   return (
     <Card>
       <CardHeader>
@@ -24,15 +23,17 @@ const SwapWidget = () => {
 
           <SwapSettings />
         </div>
-        <CardDescription className="text-xs">
+        <CardDescription className="text-xs !mt-3">
           serves as a secure bridge between various decentralized ecosystems, empowering users to
           effortlessly swap tokens across different blockchain networks.
         </CardDescription>
       </CardHeader>
 
       <CardContent>
-        <p>Card Content</p>
+        <SwapInputs />
+        <SwapSummary />
       </CardContent>
+
       <CardFooter>
         <Button className="w-full">Connect Wallet</Button>
       </CardFooter>

@@ -2,6 +2,7 @@ import animatePlugin from 'tailwindcss-animate'
 import plugin from 'tailwindcss/plugin'
 import {fontFamily} from 'tailwindcss/defaultTheme'
 import type {Config} from 'tailwindcss'
+const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColorPalette')
 
 const shadcnPlugin = plugin(
   // 1. add css variables definitions to the base layer
@@ -138,5 +139,14 @@ export const shadcnPreset = {
   prefix: '',
   darkMode: ['class'],
   content: [],
-  plugins: [animatePlugin, shadcnPlugin],
+  plugins: [animatePlugin, addVariablesForColors, shadcnPlugin],
 } satisfies Config
+
+function addVariablesForColors({addBase, theme}: any) {
+  let allColors = flattenColorPalette(theme('colors'))
+  let newVars = Object.fromEntries(Object.entries(allColors).map(([key, val]) => [`--${key}`, val]))
+
+  addBase({
+    ':root': newVars,
+  })
+}
