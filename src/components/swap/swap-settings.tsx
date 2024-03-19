@@ -5,21 +5,36 @@ import {Tooltip, TooltipContent, TooltipTrigger} from '~/components/ui/tooltip'
 import {useSwapActions, useSwapQuery} from '~/context/swap-context'
 import {Button} from '../ui/button'
 import {Separator} from '../ui/separator'
+import {useState} from 'react'
+import {cn} from '~/lib/utils'
 
 const tolerances = [0.5, 2.5, 5]
 
 const SwapSettings = () => {
   const {tolerance} = useSwapQuery()
   const {onToleranceUpdate, resetState} = useSwapActions()
+  const [isResetting, setIsResetting] = useState(false)
+
+  const onReset = () => {
+    setIsResetting(true)
+
+    setTimeout(() => {
+      resetState()
+      setIsResetting(false)
+    }, 2000)
+  }
 
   return (
     <div className="flex items-center gap-2">
       <Tooltip>
-        <TooltipTrigger>
-          <RotateCcw className="size-4" onClick={resetState} />
+        <TooltipTrigger className={!isResetting ? 'cursor-pointer' : 'cursor-default'}>
+          <RotateCcw
+            className={cn('size-4', {'pointer-events-none animate-spin': isResetting})}
+            onClick={onReset}
+          />
         </TooltipTrigger>
         <TooltipContent>
-          <p className="font-semibold italic">Reset Swap</p>
+          <p className="font-semibold italic">Reset</p>
         </TooltipContent>
       </Tooltip>
       <Popover>

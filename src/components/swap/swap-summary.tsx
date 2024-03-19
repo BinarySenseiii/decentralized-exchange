@@ -12,7 +12,7 @@ const SummaryItem = ({
 }) => (
   <div className="flex items-center gap-2 text-xs justify-between text-muted-foreground">
     <h3 className="font-medium">{label}</h3>
-    <span className={!muted ? 'text-white' : 'text-inherit'}>{value}</span>
+    <span className={!muted ? 'text-black dark:text-white' : 'text-inherit'}>{value}</span>
   </div>
 )
 
