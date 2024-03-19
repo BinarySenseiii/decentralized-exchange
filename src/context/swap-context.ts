@@ -32,6 +32,19 @@ const useSwapStore = create<ISwapStore>(set => ({
           },
         }
       }),
+
+    onTokenChange: (action, token) =>
+      set(state => {
+        return {
+          query: {
+            ...state.query,
+            [action]: {
+              ...state.query[action],
+              token,
+            },
+          },
+        }
+      }),
     resetState: () => set({query: {...initialQuery}}),
     onToleranceUpdate: tolerance => set(state => ({query: {...state.query, tolerance}})),
   },
