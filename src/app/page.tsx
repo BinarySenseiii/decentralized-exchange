@@ -1,10 +1,10 @@
 import React from 'react'
-import {ThemeToggle} from '~/components/theme-toggle'
+import {Button} from '~/components/ui/button'
 
 const HomePage = () => {
   return (
     <div className="p-8">
-      <ThemeToggle />
+      <Button>Shadcn Ui</Button>
     </div>
   )
 }

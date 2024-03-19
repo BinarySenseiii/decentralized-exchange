@@ -1,5 +1,5 @@
 import type {Config} from 'tailwindcss'
-import {shadcnPreset} from './src/lib/shadcn'
+import {shadcnPreset} from './src/lib/shadcn-ui'
 
 const config = {
   presets: [shadcnPreset],
