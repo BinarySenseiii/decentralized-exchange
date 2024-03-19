@@ -1,9 +1,9 @@
 import type {Metadata} from 'next'
 import {fontSans} from '~/components/ui/fonts'
-import siteConfig from '~/config/site-config'
 import {cn} from '~/lib/utils'
 import Providers from '~/providers'
 import './globals.css'
+import {siteConfig} from '~/constant/config'
 
 export const metadata: Metadata = {
   title: siteConfig.title,

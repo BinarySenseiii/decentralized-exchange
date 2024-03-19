@@ -1,3 +1,5 @@
+'use client'
+import useTokens from '~/api/hooks/useTokens'
 import {Button} from '../ui/button'
 import SwapSettings from './swap-settings'
 import {
@@ -10,15 +12,10 @@ import {
 } from '~/components/ui/card'
 
 const SwapWidget = () => {
+  const {data} = useTokens()
+  console.log('data::: ', data)
   return (
     <Card>
-      {/* <div className="flex items-center justify-between">
-        <h2 className="italic font-bold">
-          Dex<span className="text-primary">Bridge</span>
-        </h2>
-        <SwapSettings />
-      </div> */}
-
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="italic">
