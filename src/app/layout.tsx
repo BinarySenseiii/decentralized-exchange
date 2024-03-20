@@ -4,6 +4,7 @@ import {cn} from '~/lib/utils'
 import Providers from '~/providers'
 import './globals.css'
 import {siteConfig} from '~/constant/config'
+import Navbar from '~/components/navbar'
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   )
