@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react'
 import {Separator} from '../ui/separator'
 import {useSwapQuery} from '~/context/swap-context'
+import {useTokenPrices} from '~/api/hooks/next-server'
 
 const SummaryItem = ({
   label,
@@ -19,6 +20,7 @@ const SummaryItem = ({
 
 const SwapSummary = () => {
   const {from, to} = useSwapQuery()
+  const {data} = useTokenPrices(from.token.address!, to.token.address!)
   const summary = useMemo(
     () => [
       {id: 1, label: 'Commission', value: '$2.48'},
@@ -31,7 +33,7 @@ const SwapSummary = () => {
     <div className="space-y-4 mt-3 mb-4">
       <SummaryItem
         label="Conversion Rate"
-        value={`1 ${from.token.name} = 0.799059 ${to.token.name}`}
+        value={`1 ${from.token.name} = ${(1 * data?.ratio!).toFixed(3) ?? 0} ${to.token.name}`}
         muted
       />
 

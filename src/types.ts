@@ -1,4 +1,8 @@
-import {ChangeEvent} from 'react'
+export interface IPrice {
+  ratio: number
+  tokenOne: number
+  tokenTwo: number
+}
 
 export interface CKToken {
   chainId: number
@@ -27,7 +31,7 @@ export interface ISwapStore {
   }
 
   actions: {
-    onQueryChange: (event: ChangeEvent<HTMLInputElement>, action: 'from' | 'to') => void
+    onQueryChange: (inputValue: string | number, action: 'from' | 'to') => void
     onTokenChange: (action: 'from' | 'to', token: CkPartialToken) => void
     onSwap: () => void
     resetState: () => void

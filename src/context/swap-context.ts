@@ -2,7 +2,7 @@ import {create} from 'zustand'
 import data from '~/data/token-list.json'
 import {ISwapStore} from '~/types'
 
-const token = (name: string) => data?.tokens.filter(t => t.name === name)[0]
+const token = (name: string) => data?.tokens.filter(t => t.symbol === name)[0]
 
 const initialQuery = {
   from: {
@@ -11,7 +11,7 @@ const initialQuery = {
   },
   to: {
     inputValue: '',
-    token: token('WETH'),
+    token: token('LINK'),
   },
   tolerance: 0.5,
 }
@@ -19,15 +19,14 @@ const initialQuery = {
 const useSwapStore = create<ISwapStore>(set => ({
   query: {...initialQuery},
   actions: {
-    onQueryChange: (event, action) =>
+    onQueryChange: (inputValue, action) =>
       set(state => {
-        const inputValue = event.target.value
         return {
           query: {
             ...state.query,
             [action]: {
               ...state.query[action],
-              inputValue: inputValue,
+              inputValue,
             },
           },
         }

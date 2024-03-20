@@ -1,5 +1,5 @@
-import {ReactNode, memo, useState, useMemo} from 'react'
-import {useTokenList} from '~/api/hooks/coin-gecko'
+import {Search} from 'lucide-react'
+import {ReactNode, memo, useMemo, useState} from 'react'
 import {
   Dialog,
   DialogContent,
@@ -8,29 +8,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '~/components/ui/dialog'
-import SwapToken from './swap-token'
-import {ScrollArea} from '../ui/scroll-area'
-import {NativeInput} from '../ui/native-input'
-import {Search} from 'lucide-react'
 import {useSwapActions} from '~/context/swap-context'
+import data from '~/data/token-list.json'
 import {CkPartialToken} from '~/types'
+import {NativeInput} from '../ui/native-input'
+import {ScrollArea} from '../ui/scroll-area'
+import SwapToken from './swap-token'
 
 const SwapModal = ({children, action}: {children: ReactNode; action: 'from' | 'to'}) => {
-  const {data: tokens} = useTokenList()
   const [query, setQuery] = useState('')
   const {onTokenChange} = useSwapActions()
   const [isOpen, setIsOpen] = useState(false)
 
   const filteredTokens = useMemo(() => {
-    if (!query) return tokens.slice(0, 100)
+    if (!query) return data?.tokens.slice(0, 100)
     const lowercaseQuery = query.toLowerCase()
-    return tokens.filter(
+    return data?.tokens.filter(
       t =>
         t.name.toLowerCase().includes(lowercaseQuery) ||
         t.symbol.toLowerCase().includes(lowercaseQuery) ||
         t.address.toLowerCase().includes(lowercaseQuery),
     )
-  }, [query, tokens])
+  }, [query])
 
   const onTokenClick = (token: CkPartialToken) => {
     onTokenChange(action, token)

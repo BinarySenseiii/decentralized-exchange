@@ -1,6 +1,8 @@
-import {CKTokenResponse} from '~/types'
+import {ORIGIN} from '~/constant/config'
+import {IPrice} from '~/types'
 import {getData} from './fetcher-func'
 
-export const getTokenList = getData<CKTokenResponse>(
-  'https://tokens.coingecko.com/uniswap/all.json',
-)
+export const getprices = (fromAddress: string, toAddress: string) =>
+  getData<IPrice>(`${ORIGIN}/api/price`, {
+    params: {fromAddress, toAddress},
+  })

@@ -4,6 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'cdn.moralis.io',
+      },
+      {
+        protocol: 'https',
         hostname: 'assets.coingecko.com',
       },
     ],
