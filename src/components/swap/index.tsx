@@ -17,10 +17,7 @@ const SwapWidget = () => {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="italic">
-            Dex<span className="text-primary">Bridge</span>
-          </CardTitle>
-
+          <CardTitle className="italic">Swap</CardTitle>
           <SwapSettings />
         </div>
         <CardDescription className="text-xs !mt-3">

@@ -18,7 +18,7 @@ export default function ThemeToggleBtn() {
     <Button
       variant="outline"
       size="icon"
-      className="rounded-full "
+      className="rounded-full md:static fixed bottom-4 left-4"
       onClick={() => toggleDarkMode(theme)}
     >
       {!isClient ? (
