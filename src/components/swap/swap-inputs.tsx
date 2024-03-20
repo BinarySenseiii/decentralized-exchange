@@ -12,7 +12,6 @@ const SwapInputs = () => {
   const {from, to} = useSwapQuery()
   const {onQueryChange} = useSwapActions()
   const {address} = useAccount()
-
   const {data} = useTokenPrices(from.token.address!, to.token.address!)
 
   return (

@@ -15,7 +15,7 @@ export const WalletBalance: FC<ISwapProps> = ({address}) => {
   return isClient ? (
     data && (
       <p className="text-right text-muted-foreground text-xs w-full pr-1">
-        Current Balance = {`${data?.value}${data?.symbol}`}
+        Current Balance = {`${data?.formatted}${data?.symbol}`}
       </p>
     )
   ) : (

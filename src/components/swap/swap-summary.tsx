@@ -20,7 +20,7 @@ const SummaryItem = ({
 
 const SwapSummary = () => {
   const {from, to} = useSwapQuery()
-  const {data} = useTokenPrices(from.token.address!, to.token.address!)
+  const {data, isLoading} = useTokenPrices(from.token.address!, to.token.address!)
   const summary = useMemo(
     () => [
       {id: 1, label: 'Commission', value: '$2.48'},
@@ -33,7 +33,9 @@ const SwapSummary = () => {
     <div className="space-y-4 mt-3 mb-4">
       <SummaryItem
         label="Conversion Rate"
-        value={`1 ${from.token.name} = ${(1 * data?.ratio!).toFixed(3) ?? 0} ${to.token.name}`}
+        value={`1 ${from.token.name} = ${isLoading ? 0 : (1 * data?.ratio!).toFixed(3)} ${
+          to.token.name
+        }`}
         muted
       />
 
