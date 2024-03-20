@@ -7,9 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card'
-import {Button} from '../ui/button'
-import SwapSettings from './swap-settings'
+import WalletBtn from '../ui/wallet-button'
 import SwapInputs from './swap-inputs'
+import SwapSettings from './swap-settings'
 import SwapSummary from './swap-summary'
 
 const SwapWidget = () => {
@@ -34,7 +34,7 @@ const SwapWidget = () => {
       </CardContent>
 
       <CardFooter>
-        <Button className="w-full">Connect Wallet</Button>
+        <WalletBtn />
       </CardFooter>
     </Card>
   )

@@ -2,14 +2,14 @@
 import React, {ReactNode} from 'react'
 import {ThemeProvider} from './theme-provider'
 import {TooltipProvider} from '~/components/ui/tooltip'
-import ReactQueryProvider from './react-query'
+import Web3Provider from './web3-provider'
 
 const Providers = ({children}: {children: ReactNode}) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <ReactQueryProvider>
+      <Web3Provider>
         <TooltipProvider>{children}</TooltipProvider>
-      </ReactQueryProvider>
+      </Web3Provider>
     </ThemeProvider>
   )
 }

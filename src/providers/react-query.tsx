@@ -2,15 +2,13 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import React from 'react'
 
-function ReactQueryProvider({children}: React.PropsWithChildren) {
-  const [client] = React.useState(
-    new QueryClient({
-      defaultOptions: {queries: {staleTime: 5000, refetchOnWindowFocus: false}},
-    }),
-  )
+const queryClient = new QueryClient({
+  defaultOptions: {queries: {staleTime: 5000, refetchOnWindowFocus: false}},
+})
 
+function ReactQueryProvider({children}: React.PropsWithChildren) {
   return (
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
