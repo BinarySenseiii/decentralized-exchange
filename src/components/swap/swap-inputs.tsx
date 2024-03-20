@@ -14,13 +14,13 @@ const SwapInputs = () => {
       <p className="text-right text-muted-foreground text-xs w-full pr-1">
         Current Balance = 20ETH
       </p>
-      <Input value={from.inputValue} onChange={e => onQueryChange(e, 'from')}>
+      <Input placeholder="0.0" value={from.inputValue} onChange={e => onQueryChange(e, 'from')}>
         <SwapModal action="from">
           <SwapToken token={from.token} />
         </SwapModal>
       </Input>
       <SwapToggle />
-      <Input value={to.inputValue} onChange={e => onQueryChange(e, 'to')}>
+      <Input placeholder="0.0" value={to.inputValue} onChange={e => onQueryChange(e, 'to')}>
         <SwapModal action="to">
           <SwapToken token={to.token} />
         </SwapModal>

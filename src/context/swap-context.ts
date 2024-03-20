@@ -6,11 +6,11 @@ const token = (name: string) => data?.tokens.filter(t => t.name === name)[0]
 
 const initialQuery = {
   from: {
-    inputValue: '0.3',
+    inputValue: '',
     token: token('USDC'),
   },
   to: {
-    inputValue: '0.3',
+    inputValue: '',
     token: token('WETH'),
   },
   tolerance: 0.5,
@@ -44,6 +44,14 @@ const useSwapStore = create<ISwapStore>(set => ({
             },
           },
         }
+      }),
+
+    onSwap: () =>
+      set(state => {
+        const from = {inputValue: '', token: state.query.to.token}
+        const to = {inputValue: '', token: state.query.from.token}
+
+        return {query: {...state.query, from, to}}
       }),
     resetState: () => set({query: {...initialQuery}}),
     onToleranceUpdate: tolerance => set(state => ({query: {...state.query, tolerance}})),

@@ -39,7 +39,7 @@ const SwapModal = ({children, action}: {children: ReactNode; action: 'from' | 't
   }
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger onClick={() => setIsOpen(true)}>{children}</DialogTrigger>
       <DialogContent className="w-[95%] rounded-md p-4">
         <DialogHeader>
@@ -69,12 +69,13 @@ const SwapModal = ({children, action}: {children: ReactNode; action: 'from' | 't
           ) : (
             <div className="flex flex-col gap-2">
               {filteredTokens?.slice(0, 100).map(t => (
-                <SwapToken
-                  key={t.name}
-                  token={t}
-                  className="!static rounded-md transform-none dark:bg-gray-900 hover:dark:bg-gray-800 bg-slate-100 hover:bg-slate-200 p-2"
-                  onClick={() => onTokenClick(t)}
-                />
+                <div key={t.name}>
+                  <SwapToken
+                    token={t}
+                    className="!static rounded-md transform-none dark:bg-gray-900 hover:dark:bg-gray-800 bg-slate-100 hover:bg-slate-200 p-2"
+                    onClick={() => onTokenClick(t)}
+                  />
+                </div>
               ))}
             </div>
           )}

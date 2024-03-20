@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react'
 import {Separator} from '../ui/separator'
+import {useSwapQuery} from '~/context/swap-context'
 
 const SummaryItem = ({
   label,
@@ -17,6 +18,7 @@ const SummaryItem = ({
 )
 
 const SwapSummary = () => {
+  const {from, to} = useSwapQuery()
   const summary = useMemo(
     () => [
       {id: 1, label: 'Commission', value: '$2.48'},
@@ -27,7 +29,11 @@ const SwapSummary = () => {
   )
   return (
     <div className="space-y-4 mt-3 mb-4">
-      <SummaryItem label="Conversion Rate" value="1 BUSD = 0.799059 MATIC" muted />
+      <SummaryItem
+        label="Conversion Rate"
+        value={`1 ${from.token.name} = 0.799059 ${to.token.name}`}
+        muted
+      />
 
       <Separator />
 

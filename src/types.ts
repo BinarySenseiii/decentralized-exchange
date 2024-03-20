@@ -29,6 +29,7 @@ export interface ISwapStore {
   actions: {
     onQueryChange: (event: ChangeEvent<HTMLInputElement>, action: 'from' | 'to') => void
     onTokenChange: (action: 'from' | 'to', token: CkPartialToken) => void
+    onSwap: () => void
     resetState: () => void
     onToleranceUpdate: (tolerance: number) => void
   }
