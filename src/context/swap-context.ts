@@ -14,6 +14,7 @@ const initialQuery = {
     token: token('LINK'),
   },
   tolerance: 0.5,
+  price: {},
 }
 
 const useSwapStore = create<ISwapStore>(set => ({
@@ -54,6 +55,7 @@ const useSwapStore = create<ISwapStore>(set => ({
       }),
     resetState: () => set({query: {...initialQuery}}),
     onToleranceUpdate: tolerance => set(state => ({query: {...state.query, tolerance}})),
+    onPriceUpdate: newPrice => set(state => ({query: {...state.query, price: newPrice}})),
   },
 }))
 

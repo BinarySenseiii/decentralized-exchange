@@ -1,6 +1,6 @@
 import {getDefaultConfig} from 'connectkit'
 import {createConfig} from 'wagmi'
-import {arbitrum, mainnet, polygon, sepolia} from 'wagmi/chains'
+import {arbitrum, mainnet, polygon, polygonMumbai, sepolia} from 'wagmi/chains'
 import {siteConfig} from './constant/config'
 
 export const config = createConfig(
@@ -11,7 +11,7 @@ export const config = createConfig(
       mainnet,
       polygon,
       arbitrum,
-      ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia] : []),
+      ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia, polygonMumbai] : []),
     ],
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
   }),

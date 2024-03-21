@@ -1,6 +1,9 @@
 'use client'
+import {useDebounce} from '@uidotdev/usehooks'
+import {memo, useCallback, useEffect} from 'react'
+import {formatUnits, parseUnits} from 'viem'
 import {useAccount} from 'wagmi'
-import {useTokenPrices} from '~/api/hooks/next-server'
+import {useSwapTokenPrices, useTokenPrices} from '~/api/hooks/next-server'
 import {useSwapActions, useSwapQuery} from '~/context/swap-context'
 import {Input} from '../ui/input'
 import {WalletBalance} from './swap-balance'
@@ -10,22 +13,42 @@ import SwapToken from './swap-token'
 
 const SwapInputs = () => {
   const {from, to} = useSwapQuery()
-  const {onQueryChange} = useSwapActions()
+  const {onQueryChange, onPriceUpdate} = useSwapActions()
   const {address} = useAccount()
   const {data} = useTokenPrices(from.token.address!, to.token.address!)
+
+  const debouncedFromInput = useDebounce(from.inputValue, 500)
+  const sellAmount = parseUnits(debouncedFromInput, from.token.decimals!).toString()
+
+  const {data: swapPrices} = useSwapTokenPrices({
+    sellToken: from.token.symbol!,
+    buyToken: to.token.symbol!,
+    sellAmount: sellAmount === '0' ? parseUnits('1', 6).toString() : sellAmount,
+  })
+
+  const pricesInit = useCallback(() => {
+    if (!swapPrices) return
+    onPriceUpdate(swapPrices)
+  }, [onPriceUpdate, swapPrices])
+
+  useEffect(() => {
+    pricesInit()
+  }, [pricesInit])
 
   return (
     <main className="space-y-2 relative flex flex-col items-center w-full">
       <WalletBalance address={address} />
 
       <Input
-        disabled={!data}
+        disabled={!swapPrices}
         placeholder="0.0"
         value={from.inputValue}
         onChange={e => {
           onQueryChange(e.target.value, 'from')
-          if (data) {
-            onQueryChange((Number(e.target.value) * Number(data.ratio)).toFixed(3), 'to')
+
+          if (swapPrices) {
+            const tx = formatUnits(BigInt(parseInt(swapPrices.buyAmount)), to.token.decimals!)
+            onQueryChange(tx, 'to')
           } else {
             onQueryChange('', 'to')
           }
@@ -37,7 +60,7 @@ const SwapInputs = () => {
       </Input>
       <SwapToggle />
       <Input
-        key={data?.tokenOne}
+        key={swapPrices?.buyAmount!}
         disabled
         placeholder="0.0"
         value={to.inputValue}
@@ -51,4 +74,4 @@ const SwapInputs = () => {
   )
 }
 
-export default SwapInputs
+export default memo(SwapInputs)
